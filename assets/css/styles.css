@@ -540,8 +540,12 @@ section::after {
 .tp-caption.large_white_light {
   color: #ffffff;
   font-size: 65px;
-  font-weight: 400;
   font-weight: 300;
+}
+.tp-caption.small_white_bold {
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: 400;
 }
 .btn {
   -webkit-border-radius: 3em;
