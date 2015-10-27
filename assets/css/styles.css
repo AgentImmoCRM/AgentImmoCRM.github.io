@@ -1118,3 +1118,6 @@ form .form-control:focus {
 .navbar-default .navbar-collapse{
   padding-bottom:15px;
 }
+.app_title{
+  font-variant: small-caps;
+}
