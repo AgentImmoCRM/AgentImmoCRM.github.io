@@ -542,9 +542,14 @@ section::after {
   font-size: 65px;
   font-weight: 300;
 }
+.tp-caption.small_white_light {
+  color: #ffffff;
+  font-size: 34px;
+  font-weight: 300;
+}
 .tp-caption.small_white_bold {
   color: #ffffff;
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 400;
 }
 .btn {
