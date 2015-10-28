@@ -842,7 +842,7 @@ header .navbar-default.scrolled ul.navbar-nav li a:hover:after {
   background: #D0223E;
 }
 header .navbar-default.scrolled .navbar-brand {
-  /*background: #D0223E;*/
+  background: #D0223E;
 }
 section .section-heading .divider:after {
   background: #e16276;
@@ -1120,16 +1120,4 @@ form .form-control:focus {
 }
 .app_title{
   font-variant: small-caps;
-}
-header .navbar-default a.navbar-brand{
-  background-color: #ffffff;
-  padding: 5px;
-  border-radius: 12px;
-}
-header .navbar-default.scrolled a.navbar-brand {
-  background-color: transparent;
-  padding: 10px 0 0 0;
-}
-header .navbar-default.scrolled .navbar-brand img {
-  max-height:50px;
 }
