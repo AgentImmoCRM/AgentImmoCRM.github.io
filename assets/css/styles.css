@@ -1121,3 +1121,8 @@ form .form-control:focus {
 .app_title{
   font-variant: small-caps;
 }
+.v-1-2-news{
+  margin-left:10px;
+  color:#D0223E;
+  font-size:12px;
+}
