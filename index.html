@@ -25,6 +25,9 @@
 
 
     <script type="text/javascript" src="assets/js/modernizr.custom.32033.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+    <script src="assets/js/datamaps.world.min.js"></script>
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -60,6 +63,7 @@
                             <li><a href="#features">fonctionnalités</a></li>
                             <li><a href="#screens">écrans</a></li>
                             <li><a href="#demo">vidéo</a></li>
+                            <li><a href="#regions">pays</a></li>
                             <li><a class="getApp" href="#getApp">obtenir</a></li>
                             <li><a href="#support">support</a></li>
                             <li><a href="#terms_and_conditions">conditions</a></li>
@@ -106,13 +110,16 @@
                                 Disponible pour le Luxembourg, la Belgique,
                             </div>
                             <div class="tp-caption small_white_bold sfb" data-x="550" data-y="center" data-hoffset="0" data-voffset="200" data-speed="1000" data-start="1500" data-easing="Power4.easeOut" style="text-shadow:2px 2px rgba(0, 0, 0, 0.5)">
-                                la France, la Suisse et Monaco.
+                                la France, la Suisse, Monaco, l'Allemagne,
+                            </div>
+                            <div class="tp-caption small_white_bold sfb" data-x="550" data-y="center" data-hoffset="0" data-voffset="240" data-speed="1000" data-start="1500" data-easing="Power4.easeOut" style="text-shadow:2px 2px rgba(0, 0, 0, 0.5)">
+                                l'Espagne, le Portugal et l'Italie.
                             </div>
 
-                            <div class="tp-caption sfb" data-x="550" data-y="center" data-hoffset="0" data-voffset="265" data-speed="1000" data-start="1700" data-easing="Power4.easeOut">
+                            <div class="tp-caption sfb" data-x="550" data-y="center" data-hoffset="0" data-voffset="305" data-speed="1000" data-start="1700" data-easing="Power4.easeOut">
                                 <a href="#features" class="btn btn-primary inverse btn-lg" style="text-shadow:2px 2px rgba(0, 0, 0, 0.5)">EN SAVOIR PLUS</a>
                             </div>
-                            <div class="tp-caption sfr" data-x="770" data-y="center" data-hoffset="0" data-voffset="265" data-speed="1500" data-start="1900" data-easing="Power4.easeOut">
+                            <div class="tp-caption sfr" data-x="770" data-y="center" data-hoffset="0" data-voffset="305" data-speed="1500" data-start="1900" data-easing="Power4.easeOut">
                                 <a href="#getApp" class="btn btn-default btn-lg">OBTENIR</a>
                             </div>
                         </div>
@@ -141,8 +148,11 @@
                             <div class="tp-caption small_white_bold sfb" data-x="470" data-y="center" data-hoffset="0" data-voffset="160" data-speed="1000" data-start="1500" data-easing="Power4.easeOut">
                                 Disponible pour le Luxembourg, la Belgique,
                             </div>
-                            <div class="tp-caption small_white_bold sfb" data-x="470" data-y="center" data-hoffset="0" data-voffset="200" data-speed="1000" data-start="1500" data-easing="Power4.easeOut">
-                                la France, la Suisse et Monaco.
+                            <div class="tp-caption small_white_bold sfb" data-x="470" data-y="center" data-hoffset="0" data-voffset="200" data-speed="1000" data-start="1500" data-easing="Power4.easeOut" style="text-shadow:2px 2px rgba(0, 0, 0, 0.5)">
+                                la France, la Suisse, Monaco, l'Allemagne,
+                            </div>
+                            <div class="tp-caption small_white_bold sfb" data-x="470" data-y="center" data-hoffset="0" data-voffset="240" data-speed="1000" data-start="1500" data-easing="Power4.easeOut" style="text-shadow:2px 2px rgba(0, 0, 0, 0.5)">
+                                l'Espagne, le Portugal et l'Italie.
                             </div>
 
                             <div class="tp-caption sfb" data-x="50" data-y="center" data-hoffset="0" data-voffset="465" data-speed="1000" data-start="1700" data-easing="Power4.easeOut">
@@ -378,6 +388,7 @@
             </div>
         </section>
 
+
         <section id="demo">
             <div class="container">
                 <div class="section-heading scrollpoint sp-effect3">
@@ -392,6 +403,83 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section id="regions">
+            <div class="container">
+                <div class="section-heading scrollpoint sp-effect3">
+                    <h1>Maintenant disponible pour</h1>
+                    <div class="divider"></div>
+                    <p>le Luxembourg, la Belgique, la France, la Suisse, Monaco, l'Allemagne, la Belgique, l'Espagne, le Portugal et l'Italie</p>
+                </div>
+                <div id="map" style="position:relative;width:100%;height:800px"></div>
+                <script>
+                    var map = new Datamap({
+                        element: document.getElementById('map'),
+                        responsive: true,
+                        setProjection: function(element) {
+                          var projection = d3.geo.orthographic()
+                            .center([0, 40])
+                            .rotate([0, 0])
+                            .scale(1300)
+                            .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+                          var path = d3.geo.path()
+                            .projection(projection);
+                          return {path: path, projection: projection};
+                        },
+                        fills: {
+                            AVAILABLE: '#D0223E',
+                            defaultFill: '#ccc',
+                        },
+                        geographyConfig: {
+                            highlightOnHover: false,
+                            popupTemplate: function(geography, data) {
+                                var text = 'Disponible pour ' + data.name;
+                                return '<div class="hoverinfo"><strong>' + text + '</strong></div>';
+                            },
+                        },
+                        data: {
+                            LUX: {
+                                name: "le Luxembourg",
+                                fillKey: 'AVAILABLE',
+                            },
+                            FRA: {
+                                name: "la France",
+                                fillKey: 'AVAILABLE',
+                            },
+                            MCO: {
+                                name: "Monaco",
+                                fillKey: 'AVAILABLE',
+                            },
+                            DEU: {
+                                name: "l'Allemagne",
+                                fillKey: 'AVAILABLE',
+                            },
+                            BEL: {
+                                name: "la Belgique",
+                                fillKey: 'AVAILABLE',
+                            },
+                            PRT: {
+                                name: "le Portugal",
+                                fillKey: 'AVAILABLE',
+                            },
+                            ESP: {
+                                name: "l'Espagne",
+                                fillKey: 'AVAILABLE',
+                            },
+                            ITA: {
+                                name: "l'Italie",
+                                fillKey: 'AVAILABLE',
+                            },
+                            CHE: {
+                                name: "la Suisse",
+                                fillKey: 'AVAILABLE',
+                            },
+                        },
+                    });
+                    d3.select(window).on('resize', function() { map.resize(); });
+                </script>
             </div>
         </section>
 
